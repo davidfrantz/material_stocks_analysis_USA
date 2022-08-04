@@ -6,15 +6,15 @@ df_ <- read.csv("csv/joined/data_absolute.csv")
 names <- c("building_percentage",
            "techno_percentage")
 
-lab  <- c("building mass / human-made material stock (%)",
-          "human-made material stock / entire stock (%)")
-lab_left  <- c("more mobility\ninfrastructure", "more\nbiomass")
-lab_right <- c("more\nbuildings", "more\nhuman-made\nmaterials")
+lab  <- c("building stocks / built-up stocks (%)",
+          "built-up stocks / entire stocks (%)")
+lab_left  <- c("more mobility\ninfrastructure\nstocks", "more\nplant\nstocks")
+lab_right <- c("more\nbuilding\nstocks", "more\nbuilt-up\nstocks")
 
 textx_left  <- c(5, 17.5)
-texty_left  <- c(45, 45)
+texty_left  <- c(50, 50)
 textx_right <- c(72.5, 52.5)
-texty_right <- c(55, 70)
+texty_right <- c(50, 70)
 
 pal <- list(
     brewer.pal(7, "BrBG"),
@@ -103,21 +103,21 @@ for (i in 1:length(names)) {
     lines(tmp$cat,
           tmp$pop_total_cum_pct_total,
           col = "black",
-          lty = 3)
+          lty = 1)
 
     lines(tmp$cat,
           tmp$pop_urban_cum_pct,
           col = "black",
-          lty = 1)
+          lty = 2)
 
     lines(tmp$cat,
           tmp$pop_rural_cum_pct,
           col = "black",
-          lty = 2)
+          lty = 3)
 
     legend("topleft", legend = c("total", "urban", "rural"),
             col = c("black", "black", "black"),
-            lty = c(3, 1, 2),
+            lty = c(1, 2, 3),
             bty = "n",
             cex = 0.8,
             inset = c(-0.01, -0.01),
@@ -136,7 +136,7 @@ for (i in 1:length(names)) {
          tcl = -0.3,
          gap.axis = 0.2)
 
-    mtext("cum. population living\nin counties with given\nmaterial footprint (%)",
+    mtext("cum. population living\nin counties with given\nmaterial stocks (%)",
           side = 2,
           line = 1.5)
 

@@ -35,6 +35,9 @@ pairs(data %>% select(-STATE_NAME))
 data_train <- data %>% group_by(STATE_NAME) %>% sample_frac(.5)
 data_valid <- data %>%  anti_join(data_train)
 
+nrow(data_train)
+nrow(data_valid)
+
 # LM
 
 lm_data <-  lm(mass_building ~ mass_mobility -STATE_NAME, data = data_train)
