@@ -14,8 +14,8 @@ This repository features code used for generating and analyzing material stock d
 
 **D. Frantz, F. Schug, D. Wiedenhofer, A. Baumgart, D. Virág, S. Cooper, C. Gomez-Medina, F. Lehmann, T. Udelhoven, S. van der Linden, P. Hostert, H. Haberl.** Weighing the US Economy: Map of Built Structures Unveils Patterns in Human-Dominated Landscapes. *In prep*
 
-For further information, please visit the [main public data repository](doi.org/10.5281/zenodo.6873743), browse through our [web-viewer](https://ows.geo.hu-berlin.de/webviewer/us-stocks/), or 
-visit our [website](boku.ac.at/understanding-the-role-of-material-stock-patterns-for-the-transformation-to-a-sustainable-society-mat-stocks) to learn more about our project MAT_STOCKS - Understanding the Role of Material Stock Patterns for the Transformation to a Sustainable Society.
+For further information, please visit the [main public data repository](https://doi.org/10.5281/zenodo.6873743), browse through our [web-viewer](https://ows.geo.hu-berlin.de/webviewer/us-stocks/), or 
+visit our [website](https://boku.ac.at/understanding-the-role-of-material-stock-patterns-for-the-transformation-to-a-sustainable-society-mat-stocks) to learn more about our project MAT_STOCKS - Understanding the Role of Material Stock Patterns for the Transformation to a Sustainable Society.
 
 All scripts require that the working directory is the main directory of this repository.
 
