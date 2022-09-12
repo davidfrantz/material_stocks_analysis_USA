@@ -2,7 +2,7 @@
 
 Humanity’s role in changing the face of the earth is a long-standing concern, as is the human domination of ecosystems.
 Geologists are debating the introduction of a new geological epoch, the ‘anthropocene’, as humans are ‘overwhelming the great forces of nature’.
-In this context, the accumulation of artefacts, i.e., human-made physical objects, is a pervasive phenomenon. 
+In this context, the accumulation of artifacts, i.e., human-made physical objects, is a pervasive phenomenon. 
 Variously dubbed ‘manufactured capital’, ‘technomass’, ‘human-made mass’, ‘in-use stocks’ or ‘socioeconomic material stocks’, 
 they have become a major focus of sustainability sciences in the last decade. 
 Globally, the mass of socioeconomic material stocks now exceeds 10e14 kg, which is roughly equal to the dry-matter equivalent of all biomass on earth. 
