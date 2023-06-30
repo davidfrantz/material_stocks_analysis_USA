@@ -201,9 +201,9 @@ write.csv(df_pop_,  sprintf("%s/joined/data_per-pop.csv",  dcsv))
 
 dir.create(sprintf("%s/joined", dshp))
 df %>% filter(YEAR == 2018) %>%
-  st_write(sprintf("%s/joined/data_absolute.gpkg", dshp), layer = "stocks")
+  st_write(sprintf("%s/joined/data_absolute.gpkg", dshp), layer = "stocks", append = FALSE)
 df_area %>% filter(YEAR == 2018) %>%
-  st_write(sprintf("%s/joined/data_per-area.gpkg", dshp), layer = "stocks")
+  st_write(sprintf("%s/joined/data_per-area.gpkg", dshp), layer = "stocks", append = FALSE)
 df_pop %>% filter(YEAR == 2018) %>%
-  st_write(sprintf("%s/joined/data_per-pop.gpkg",  dshp), layer = "stocks")
+  st_write(sprintf("%s/joined/data_per-pop.gpkg",  dshp), layer = "stocks", append = FALSE)
 

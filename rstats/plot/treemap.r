@@ -1,6 +1,8 @@
 require(dplyr)
 require(tidyr)
 require(plotly)
+require(treemap)
+
 
 df_ <- read.csv("csv/joined/data_absolute.csv")
 

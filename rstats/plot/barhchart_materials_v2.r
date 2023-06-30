@@ -2,7 +2,7 @@ require(dplyr)
 require(tidyr)
 require(plotly)
 
-dir_csv <- "A:/hub/mat_stocks/git/mat_stocks/paper/USA/csv/mass-per-state"
+dir_csv <- "csv/mass-per-state"
 files_csv <- dir(dir_csv, "ENLOCALE", full.names = TRUE)
 n_csv <- length(files_csv)
 
@@ -17,7 +17,7 @@ for (i in 1:n_csv){
     mutate(category = gsub("street", "mobility", category)) %>%
     mutate(category = gsub("rail", "mobility", category)) %>%
     group_by(category) %>%
-    summarize_all(sum)
+    summarize_all("sum")
   
   df_ <- rbind(df_, tmp)
   
@@ -25,7 +25,7 @@ for (i in 1:n_csv){
 
 df_ <- df_ %>% 
   group_by(category) %>%
-  summarize_all(sum) %>%
+  summarize_all("sum") %>%
   select(-total)
 
 df_ <- df_ %>% rbind(0)
@@ -69,7 +69,7 @@ df_ <- df_ %>%
 
 
 {
-  tiff("A:/hub/mat_stocks/paper-data-USA/material_stocks_analysis_USA/plot/barchart_materials/barchart_materials_2.tif",
+  tiff("plot/barchart_materials/barchart_materials.tif",
        width = 6.5, height = 5.0, units = "cm", pointsize = 7,
        compression = "lzw", res = 600, type = "cairo", antialias = "subpixel"
   )
