@@ -1,17 +1,24 @@
-require(raster)
+require(terra)
 require(dplyr)
 require(ggplot2)
+require(biscale)
+require(ggspatial)
 
 
 img <- brick(
     "/data/ahsoka/gi-sds/hub/mat_stocks/paper-data-USA/main/human-habitat/percent_rgb.tif")
+img <- rast(
+  "A:/hub/mat_stocks/paper-data-USA/main/main/human-habitat/percent_rgb.tif")
 
 
-img_spdf <- as(img, "SpatialPixelsDataFrame")
-img_df <- as.data.frame(img_spdf)
-colnames(img_df) <- c("r", "g", "b", "x", "y")
+boundaries <- st_read("shp/us_proj_5km.gpkg")
+boundaries <- st_transform(boundaries, st_crs(img))
 
-img_df <- img_df[-which(img_df$g + img_df$g + img_df$b == 0), ]
+
+img_df <- as.data.frame(img, xy = TRUE)
+colnames(img_df) <- c("x", "y", "r", "g", "b")
+
+img_df <- img_df[-which(img_df$r + img_df$g + img_df$b == 0), ]
 img_df <- img_df %>%
     mutate(r = pmax(r, 0)) %>%
     mutate(g = pmax(g, 0)) %>%
@@ -33,10 +40,23 @@ sum(sub_df$r > sub_df$b) / sum((sub_df$g + sub_df$r + sub_df$b) > 0)
 sum(sub_df$b > sub_df$r) / sum((sub_df$g + sub_df$r + sub_df$b) > 0)
 sum(sub_df$r == sub_df$b) / sum((sub_df$g + sub_df$r + sub_df$b) > 0)
 
+img_df <- img_df %>%
+  mutate(rb = r+b) %>%
+  mutate(g_bi = pmin(as.integer(g / 0.25) + 1L, 4L)) %>%
+  mutate(r_bi = pmin(as.integer(r / 0.25) + 1L, 4L)) %>%
+  mutate(b_bi = pmin(as.integer(b / 0.25) + 1L, 4L)) %>%
+  mutate(rb_bi = pmin(as.integer(rb / 0.25) + 1L, 4L)) %>%
+  mutate(rb_bi_g.rb = paste(g_bi, rb_bi, sep = "-")) %>%
+  mutate(rb_bi_r.b = paste(r_bi, b_bi, sep = "-"))
+
+
+
+
+#bi_img_df <- bi_class(img_df, x = rb, y = g, style = "equal", dim = 4)
 
 
 tiff("plot/map/human_habitat_map.tif",
-width = 5.5, height = 3.0, units = "cm", pointsize = 6,
+width = 18, height = 10.8, units = "cm", pointsize = 6,
 compression = "lzw", res = 600, type = "cairo", antialias = "subpixel")
 
   par(
@@ -47,17 +67,58 @@ compression = "lzw", res = 600, type = "cairo", antialias = "subpixel")
   
   theme_set(theme_bw(base_size = 6))
   
+  #fig <- ggplot() +
+  #    geom_tile(
+  #        data = img_df,
+  #        aes(x = x, y = y, fill = rgb(r, g, b))) +
+  #    scale_fill_identity() +
+  #    coord_sf(datum = NA) +
+  #    theme(
+  #      panel.border = element_blank(),
+  #      legend.position = "none"
+  #    )
+
   fig <- ggplot() +
-      geom_tile(
-          data = img_df,
-          aes(x = x, y = y, fill = rgb(r, g, b))) +
-      scale_fill_identity() +
-      coord_sf(datum = NA) +
-      theme(
-        panel.border = element_blank(),
-        legend.position = "none"
-      )
-      
+    geom_raster(
+      data = img_df, 
+      mapping = aes(x = x, y = y, fill = rb_bi_r.b), 
+      show.legend = FALSE
+    ) +
+    bi_scale_fill(pal = "GrPink2", dim = 4) +
+    geom_sf(
+      data = boundaries, 
+      fill = NA, 
+      color = "grey25",
+      lwd = 0.15
+    ) +
+    coord_sf(datum = NA) +
+    theme(
+      panel.border = element_blank(),
+      legend.position = "none",
+      axis.title.x=element_blank(),
+      axis.title.y=element_blank()
+    ) +
+    annotation_scale(
+      location = "bl",
+      height = unit(0.15, "cm"),
+      style = "ticks"
+    )
+    #bi_theme()
+
+  
   fig  %>% plot()
+  
 
 dev.off()
+
+
+tiff("plot/map/human_habitat_legend.tif",
+     width = 2.0, height = 2.0, units = "cm", pointsize = 6,
+     compression = "lzw", res = 600, type = "cairo", antialias = "subpixel")
+
+  bi_legend(pal = "GrPink2",
+            size = 6,
+            dim = 4)
+
+dev.off()
+  

@@ -67,10 +67,10 @@ for (i in 1:length(names)) {
     rownames(mat) <- tmp$cat
 
     tiff(sprintf("plot/cumulative-pop/human-habitat_cumplot_%s.tif", gsub("_", "-", names[i])),
-    width = 5.5, height = 3.0, units = "cm", pointsize = 6,
+    width = 8.8, height = 4.8, units = "cm", pointsize = 7,
     compression = "lzw", res = 600, type = "cairo", antialias = "subpixel")
 
-    par(mai = c(0.25, 0.45, 0.08, 0.075),
+    par(mai = c(0.3, 0.5, 0.08, 0.075),
         cex = 1,
         mgp = c(3, 0.5, 0))
 
