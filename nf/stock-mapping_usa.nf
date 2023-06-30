@@ -13,7 +13,7 @@ params.country      = "USA"
 params.country_code = "US"
 
 // project directory
-params.dir_project = "/data/Jakku/mat_stocks"
+params.dir_project = "/data/ahsoka/gi-sds/hub/mat_stocks"
 
 // directories
 params.dir = [
@@ -26,7 +26,7 @@ params.dir = [
     "footprint":  params.dir_project + "/building/" + params.country,
     "height":     params.dir_project + "/height/"   + params.country,
     "climate":    params.dir_project + "/climate/"  + params.country,
-    "pub":        params.dir_project + "/stock/"    + params.country,
+    "pub":        params.dir_project + "/stock_v2/" + params.country,
     "mi":         params.dir_project + "/mi/"       + params.country,
     "areacorr":   params.dir_project + "/areacorr/" + params.country
 ]
@@ -54,10 +54,10 @@ params.raster = [
 
 // MI files
 params.mi = [
-    "building": [params.dir.mi, "building.csv"], 
-    "street":   [params.dir.mi, "street.csv"], 
-    "rail":     [params.dir.mi, "rail.csv"], 
-    "other":    [params.dir.mi, "other.csv"], 
+    "building": [params.dir.mi, "building_v6.csv"], 
+    "street":   [params.dir.mi, "street_v6.csv"], 
+    "rail":     [params.dir.mi, "rail_v6.csv"], 
+    "other":    [params.dir.mi, "other_v6.csv"], 
 ]
 
 

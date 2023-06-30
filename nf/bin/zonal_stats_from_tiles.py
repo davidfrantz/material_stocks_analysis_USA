@@ -2,7 +2,7 @@
 
 import sys
 #import uuid
-import gdal
+from osgeo import gdal
 import pandas as pd
 import numpy as np
 import csv
