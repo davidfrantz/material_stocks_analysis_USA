@@ -2,11 +2,11 @@
 
 Humanity’s role in changing the face of the earth is a long-standing concern, as is the human domination of ecosystems.
 Geologists are debating the introduction of a new geological epoch, the ‘anthropocene’, as humans are ‘overwhelming the great forces of nature’.
-In this context, the accumulation of artefacts, i.e., human-made physical objects, is a pervasive phenomenon. 
+In this context, accumulating artifacts, i.e., human-made physical objects, is a pervasive phenomenon. 
 Variously dubbed ‘manufactured capital’, ‘technomass’, ‘human-made mass’, ‘in-use stocks’ or ‘socioeconomic material stocks’, 
 they have become a major focus of sustainability sciences in the last decade. 
 Globally, the mass of socioeconomic material stocks now exceeds 10e14 kg, which is roughly equal to the dry-matter equivalent of all biomass on earth. 
-It is doubling roughly every 20 years, almost perfectly in line with ‘real’ (i.e. inflation-adjusted) GDP. 
+It doubles approximately every 20 years, almost perfectly in line with ‘real’ (i.e., inflation-adjusted) GDP. 
 In terms of mass, buildings and infrastructures (here collectively called ‘built structures’) represent the overwhelming majority of 
 all socioeconomic material stocks.
 
@@ -20,4 +20,5 @@ visit our [website](https://boku.ac.at/understanding-the-role-of-material-stock
 All scripts require that the working directory is the main directory of this repository.
 
 Funding
-This research was primarly funded by the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (MAT_STOCKS, grant agreement No 741950).
+This research was primarily funded by the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation program (MAT_STOCKS, grant agreement No 741950).
+
