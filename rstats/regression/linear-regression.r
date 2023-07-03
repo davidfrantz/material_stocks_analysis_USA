@@ -30,22 +30,33 @@ data <- data[complete.cases(data), ]
 pairs(data %>% select(-STATE_NAME))
 
 
-# 50% samples from each STATE
+r2 <- matrix(NA, 100, 2)
 
-data_train <- data %>% group_by(STATE_NAME) %>% sample_frac(.5)
-data_valid <- data %>%  anti_join(data_train)
+for (i in 1:100){
+  
+  # 50% samples from each STATE
+  
+  data_train <- data %>% group_by(STATE_NAME) %>% sample_frac(.5)
+  data_valid <- data %>%  anti_join(data_train)
+  
+  nrow(data_train)
+  nrow(data_valid)
+  
+  # LM
+  
+  lm_data <-  lm(mass_building ~ mass_mobility -STATE_NAME, data = data_train)
+  
+  summary(lm_data)
+  r2[i,1] <- summary(lm_data)$r.squared
+  
+  data_valid <- data_valid %>% 
+    mutate(predicted = predict(lm_data, data_valid)) %>%
+    mutate(observed = mass_building)
+  
+  r2[i,2] <- cor(data_valid$observed, data_valid$predicted)^2
+  
+}
 
-nrow(data_train)
-nrow(data_valid)
 
-# LM
+colMeans(r2)
 
-lm_data <-  lm(mass_building ~ mass_mobility -STATE_NAME, data = data_train)
-
-summary(lm_data)
-
-data_valid <- data_valid %>% 
-  mutate(predicted = predict(lm_data, data_valid)) %>%
-  mutate(observed = mass_building)
-
-cor(data_valid$observed, data_valid$predicted)^2
