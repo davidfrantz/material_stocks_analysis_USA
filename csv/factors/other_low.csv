@@ -1,0 +1,17 @@
+material,airport,parking,impervious
+iron_steel,0,0,0
+copper,0,0,0
+aluminum,0,0,0
+all_other_metals,0,0,0
+concrete,0.21519378447017262,0,0
+bricks,0,0,0
+glass,0,0,0
+aggregate,0.991005125026467,0.49456085999999994,0.49456085999999994
+all_other_minerals,0,0,0
+timber,0,0,0
+other_biomass_based_materials,0,0,0
+bitumen,0.01230690131718248,0.01063244,0.01063244
+all_other_fossil_fuel_based_materials,0,0,0
+all_other_materials,0,0,0
+insulation,0,0,0
+total,1.218505810813822,0.5051933,0.5051933
