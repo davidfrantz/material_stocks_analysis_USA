@@ -4,15 +4,13 @@ require(viridis)
 require(ggthemes)
 require(terra)
 require(sf)
+require(ggspatial)
 
-#dbase <- "/data/ahsoka/gi-sds/hub/mat_stocks/stock/USA/ALL"
-
-dbase <- "A:/hub/mat_stocks/stock/USA/ALL"
-setwd("A:/hub/mat_stocks/paper-data-USA/material_stocks_analysis_USA/")
+dbase <- "/data/ahsoka/gi-sds/hub/mat_stocks/stock/USA/ALL"
 
 stock <- rast(sprintf("%s/mass_grand_total_Gt_10km2.tif", dbase))
 
-fshp <- "material_stocks_analysis_USA/shp/us_proj_5km.gpkg"
+fshp <- "shp/us_proj_5km.gpkg"
 
 
 
@@ -33,21 +31,26 @@ gg <- ggplot() +
     geom_sf(data = boundaries, 
         fill = NA, color = "grey25", linewidth = 0.25) +
     scale_fill_gradientn(
-        colours = c("grey95", viridis(5), "orange", "red", "magenta"),
-        values = c(0, seq(0.01, 0.075, length.out = 5), 0.2, 0.3, 1),
-        breaks = c(0.01, 0.1, 0.2, 0.28),
+        colours = c("white", "grey95", viridis(5), "orange", "red", "magenta"),
+        values = c(0, 0.0001, seq(0.01, 0.075, length.out = 5), 0.2, 0.3, 1),
+        breaks = c(0.0001, 0.01, 0.1, 0.2, 0.28),
         na.value = "white") +
     labs(fill = "Total stock [Gt/10km?]") +
     coord_sf() +
     theme_map() +
     #theme(legend.position = "top") #+
-    theme(legend.position = "none") #+
+    theme(legend.position = "none")   +
+    annotation_scale(
+      location = "bl",
+      height = unit(0.15, "cm"),
+      style = "ticks"
+    ) #+
     #theme(legend.key.width = unit(1000, "cm"))
 gg
 
 dir.create("plot/map")
 tiff("plot/map/map_total_stocks_2d.tif",
-width = 8.8, height = 6, units = "cm", pointsize = 8,
+width = 8.8*2, height = 6*2, units = "cm", pointsize = 8,
 compression = "lzw", res = 600, type = "cairo", antialias = "subpixel")
     gg
 dev.off()
@@ -64,11 +67,11 @@ gg3 <- plot_gg(gg,
 gg3
 
 
-render_highquality("plot/map/map_total_stocks_3d2_dd.tif",
-render_highquality("map_total_stocks_3d2_dd.tif",
+#render_highquality("plot/map/map_total_stocks_3d2_dd.tif",
+render_highquality("map_total_stocks_3d2_ddef.tif",
                                       
-    width = 4096*1.5,
-    height = 4096*1.5,
+    width = 4096*.75,
+    height = 4096*.75,
     parallel = TRUE,
     progress = TRUE, 
     ambient_light = TRUE,

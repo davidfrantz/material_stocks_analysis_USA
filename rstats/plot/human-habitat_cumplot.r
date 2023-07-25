@@ -8,11 +8,11 @@ names <- c("building_percentage",
 
 lab  <- c("building stocks / built-up stocks (%)",
           "built-up stocks / entire stocks (%)")
-lab_left  <- c("more mobility\ninfrastructure\nstocks", "more\nplant\nstocks")
+lab_left  <- c("more mobility\ninfrastructure\nstocks", "more\nplant biomass\nstocks")
 lab_right <- c("more\nbuilding\nstocks", "more\nbuilt-up\nstocks")
 
 textx_left  <- c(5, 17.5)
-texty_left  <- c(50, 50)
+texty_left  <- c(50, 42)
 textx_right <- c(72.5, 52.5)
 texty_right <- c(50, 70)
 
@@ -67,10 +67,10 @@ for (i in 1:length(names)) {
     rownames(mat) <- tmp$cat
 
     tiff(sprintf("plot/cumulative-pop/human-habitat_cumplot_%s.tif", gsub("_", "-", names[i])),
-    width = 8.8, height = 4.8, units = "cm", pointsize = 7,
+    width = 8.8, height = 4.8, units = "cm", pointsize = 9,
     compression = "lzw", res = 600, type = "cairo", antialias = "subpixel")
 
-    par(mai = c(0.3, 0.5, 0.08, 0.075),
+    par(mai = c(0.4, 0.65, 0.1, 0.1),
         cex = 1,
         mgp = c(3, 0.5, 0))
 
@@ -157,9 +157,61 @@ for (i in 1:length(names)) {
 
     dev.off()
 
+    tmp %>%
+      filter(as.character(cat) == "49.0")
+    tmp %>% 
+        filter(pop_total_cum_pct_total > 50)
     tmp %>% 
         filter(pop_urban_cum_pct > 50)
     tmp %>% 
         filter(pop_rural_cum_pct > 50)
 
 }
+
+
+
+
+# total population
+pop_total <- df_ %>% 
+  filter(YEAR == 2018) %>%
+  select(POP_NOW) %>%
+  summarise_if(is.numeric, sum) %>%
+  unlist()
+pop_total
+
+# total urban population
+pop_urban <- df_ %>% 
+  filter(YEAR == 2018) %>%
+  mutate(POP_URBAN = POP_NOW * POPPCT_URBAN / 100) %>%
+  select(POP_URBAN) %>%
+  summarise_if(is.numeric, sum) %>%
+  unlist()
+pop_urban
+
+# total rural population
+pop_rural <- df_ %>% 
+  filter(YEAR == 2018) %>%
+  mutate(POP_RURAL = POP_NOW * POPPCT_RURAL / 100) %>%
+  select(POP_RURAL) %>%
+  summarise_if(is.numeric, sum) %>%
+  unlist()
+pop_rural
+
+pop_total
+pop_urban + pop_rural
+  
+
+# percentage of population in biomass-dominated counties
+df_ %>% 
+  filter(YEAR == 2018) %>%
+  filter(techno_percentage < 50) %>% 
+  select(POP_NOW) %>%
+  summarise_if(is.numeric, sum) %>%
+  '/'(pop_total) %>%
+  '*'(100)
+
+
+
+
+
+

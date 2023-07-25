@@ -45,7 +45,7 @@ names(tmp) <- gsub("area", "total_area", names(tmp))
 
 tab <- tab %>% 
   inner_join(tmp, by = "zone") %>%
-  mutate(percent = area / total_area * 100)
+  mutate(percent = pmin(area / total_area * 100, 30))
 
 tab <- tab %>% 
   as.data.frame()
@@ -82,6 +82,7 @@ for (i in 1:n_types) {
   fig <- ggplot(data) +
     geom_sf(
       aes_string(fill = "percent"),
+      color = NA,
       linewidth = 0
     ) +
     scale_fill_viridis(
@@ -90,7 +91,7 @@ for (i in 1:n_types) {
       direction = +1,
       breaks = br,
       labels = sprintf("%d%%", br),
-      limits = c(0, 100)
+      limits = c(0, 30)
     ) +
     geom_sf(data = boundaries, 
             fill = NA, color = "grey25", linewidth = 0.15) +

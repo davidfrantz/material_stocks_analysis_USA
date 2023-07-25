@@ -1,4 +1,4 @@
-# this script ...
+# this script computes general statistics used in the paper
 
 require(dplyr)
 require(tidyr)
@@ -140,11 +140,21 @@ stock_summary %>%
     select(starts_with("Gt")) 
 
 
+# percent of skyscrapers and subways relative to all stocks
+stock_states %>% 
+  summarise_if(is.numeric, sum, na.rm = TRUE) %>% 
+  mutate(perc_sky = building_skyscraper / grand_total_t_10m2 * 100) %>%
+  mutate(perc_sub = (rail_subway_surface+rail_subway+rail_subway_elevated) / grand_total_t_10m2 * 100) %>%
+  select(starts_with("perc")) 
 
+# Gt of low-rise residential and local roads in Gt
+stock_states %>%
+  summarise_if(is.numeric, sum, na.rm = TRUE) %>% 
+  select(building_singlefamily, street_local) / 1e9
 
-
-
-
+# total stock relative to plant biomass stock
+total / 48.5
+total / 48.5 * 100 # percent
 
 
 

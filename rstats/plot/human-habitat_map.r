@@ -3,6 +3,7 @@ require(dplyr)
 require(ggplot2)
 require(biscale)
 require(ggspatial)
+require(sf)
 
 
 img <- brick(
